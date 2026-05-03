@@ -1,6 +1,6 @@
 BUILD_MODE = "NAT"
 
-NUM_MASTER_NODES = 3
+NUM_MASTER_NODES = 1
 NUM_WORKER_NODES = 3
 
 # Network parameters for NAT mode
