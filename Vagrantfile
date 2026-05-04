@@ -1,7 +1,7 @@
 BUILD_MODE = "NAT"
 
 NUM_MASTER_NODES = 1
-NUM_WORKER_NODES = 3
+NUM_WORKER_NODES = 1
 
 # Network parameters for NAT mode
 IP_NW = "192.168.56"
