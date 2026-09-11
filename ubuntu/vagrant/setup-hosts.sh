@@ -6,9 +6,11 @@ set -e
 
 IP_NW=$1
 BUILD_MODE=$2
-NUM_WORKER_NODES=$3
-MASTER_IP_START=$4
-NODE_IP_START=$5
+NUM_MASTER_NODES=$3
+NUM_WORKER_NODES=$4
+MASTER_IP_START=$5
+NODE_IP_START=$6
+
 
 if [ "$BUILD_MODE" = "BRIDGE" ]
 then
@@ -55,10 +57,14 @@ echo "PRIMARY_IP=${MY_IP}" >> /etc/environment
 [ "$BUILD_MODE" = "BRIDGE" ] && exit 0
 
 # Update /etc/hosts about other hosts (NAT mode)
-echo "${MY_NETWORK}.${MASTER_IP_START} controlplane" >> /etc//hosts
-for i in $(seq 1 $NUM_WORKER_NODES)
+for i in $(seq 1 $NUM_MASTER_NODES)
 do
-    num=$(( $NODE_IP_START + $i ))
-    echo "${MY_NETWORK}.${num} node0${i}" >> /etc//hosts
+    num=$((MASTER_IP_START + i))
+    echo "${MY_NETWORK}.${num} master0${i}" >> /etc/hosts
 done
 
+for i in $(seq 1 $NUM_WORKER_NODES)
+do
+    num=$((NODE_IP_START + i))
+    echo "${MY_NETWORK}.${num} node0${i}" >> /etc/hosts
+done

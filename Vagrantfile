@@ -28,6 +28,7 @@ def setup_dns(node)
     s.args = [
       IP_NW,
       BUILD_MODE,
+      NUM_MASTER_NODES,
       NUM_WORKER_NODES,
       MASTER_IP_START,
       NODE_IP_START
