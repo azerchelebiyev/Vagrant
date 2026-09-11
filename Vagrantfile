@@ -1,7 +1,7 @@
 BUILD_MODE = "NAT"
 
-NUM_MASTER_NODES = 1
-NUM_WORKER_NODES = 1
+NUM_MASTER_NODES = 2
+NUM_WORKER_NODES = 2
 
 # Network parameters
 IP_NW = "192.168.56"
@@ -17,22 +17,6 @@ def get_machine_id(vm_name)
   else
     return File.read(machine_id_filepath)
   end
-end
-
-def all_nodes_up()
-  (1..NUM_MASTER_NODES).each do |i|
-    if get_machine_id("master0#{i}").nil?
-      return false
-    end
-  end
-
-  (1..NUM_WORKER_NODES).each do |i|
-    if get_machine_id("node0#{i}").nil?
-      return false
-    end
-  end
-
-  return true
 end
 
 # Configure hosts file and DNS
